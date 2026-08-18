@@ -182,7 +182,7 @@
   justify-content: space-between;
   background: rgba(0, 188, 212, 0.08);
   border: 1px dashed rgba(0, 188, 212, 0.5);
-  padding: 8px 12px;
+  padding: 10px 14px;
   border-radius: var(--radius-md);
   margin-bottom: 16px;
   cursor: pointer;
@@ -197,9 +197,9 @@
 .pill-left {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   color: var(--logo-navy);
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   font-weight: 700;
 }
 
@@ -210,12 +210,11 @@
 .pill-badge {
   background: #FFFFFF;
   border: 1px solid var(--border-color);
-  padding: 2px 6px;
+  padding: 3px 8px;
   border-radius: var(--radius-sm);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--logo-navy);
-  font-weight: 600;
-  font-family: monospace;
+  font-weight: 700;
 }
 
 .error-alert {
@@ -369,14 +368,14 @@
   color: var(--logo-cyan);
 }
 
-/* Modal */
+/* Modals */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(15, 33, 55, 0.5);
+  background: rgba(15, 33, 55, 0.6);
   backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
@@ -392,6 +391,13 @@
   max-width: 440px;
   padding: 24px;
   box-shadow: 0 20px 40px rgba(15, 33, 55, 0.15);
+}
+
+.demo-roles-modal {
+  max-width: 680px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
@@ -421,10 +427,89 @@
   color: var(--logo-navy);
 }
 
+.role-selector-scroll-list {
+  overflow-y: auto;
+  padding-right: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dept-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dept-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--logo-navy);
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 8px;
+}
+
+.role-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.role-card:hover {
+  background: #FFFFFF;
+  border-color: var(--logo-red);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.1);
+  transform: translateY(-1px);
+}
+
+.role-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.role-emp-id {
+  font-size: 0.72rem;
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--logo-red);
+}
+
+.role-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--logo-navy);
+}
+
+.role-badge {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.select-link {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--logo-cyan);
+}
+
 .modal-desc {
   font-size: 0.85rem;
   color: var(--text-muted);
-  margin-bottom: 14px;
+  margin-bottom: 10px;
   line-height: 1.5;
 }
 

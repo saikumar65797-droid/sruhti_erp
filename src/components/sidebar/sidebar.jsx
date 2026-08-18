@@ -16,20 +16,25 @@ import logo from '../../assets/logo.png';
 import './sidebar.css';
 
 const Sidebar = ({ isCollapsed }) => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
+  const role = user?.role || 'CEO';
 
-  // Menu items in exact requested order:
+  // Base list of all items in requested order:
   // dashboard, attendance, tickets, leads, tasks, leave, expense, calendar
-  const navItems = [
-    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-    { name: 'Attendance', path: '/attendance', icon: Clock },
-    { name: 'Tickets', path: '/tickets', icon: Ticket },
-    { name: 'Leads', path: '/leads', icon: Target },
-    { name: 'Tasks', path: '/tasks', icon: CheckSquare },
-    { name: 'Leave', path: '/leave', icon: Palmtree },
-    { name: 'Expense', path: '/expense', icon: Receipt },
-    { name: 'Calendar', path: '/calendar', icon: CalendarDays },
+  const allNavItems = [
+    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard, roles: ['ALL'] },
+    { name: 'Attendance', path: '/attendance', icon: Clock, roles: ['ALL'] },
+    { name: 'Tickets', path: '/tickets', icon: Ticket, roles: ['ALL'] },
+    { name: 'Leads', path: '/leads', icon: Target, roles: ['ALL'] },
+    { name: 'Tasks', path: '/tasks', icon: CheckSquare, roles: ['ALL'] },
+    { name: 'Leave', path: '/leave', icon: Palmtree, roles: ['ALL'] },
+    { name: 'Expense', path: '/expense', icon: Receipt, roles: ['ALL'] },
+    { name: 'Calendar', path: '/calendar', icon: CalendarDays, roles: ['ALL'] },
   ];
+
+  const navItems = allNavItems.filter(
+    (item) => item.roles.includes('ALL') || item.roles.includes(role)
+  );
 
   return (
     <aside className={`screenshot-sidebar ${isCollapsed ? 'collapsed' : ''}`}>

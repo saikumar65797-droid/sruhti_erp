@@ -6,7 +6,8 @@ import {
   ChevronDown, 
   ChevronUp, 
   Bell, 
-  Building 
+  Building,
+  ShieldCheck
 } from 'lucide-react';
 import './navbar.css';
 
@@ -17,6 +18,8 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
 
   const userName = user?.name || 'Executive Office';
   const userRole = user?.role || 'CEO';
+  const empId = user?.employeeId || 'ST-CEO-001';
+  const clusterId = user?.clusterId || null;
   const initial = userName.charAt(0).toUpperCase() || 'E';
 
   // Handle click outside to close the profile dropdown
@@ -59,8 +62,14 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
             <span>{initial}</span>
           </div>
           <div className="user-text-meta">
-            <span className="user-fullname">{userName}</span>
-            <span className="user-role-label">{userRole}</span>
+            <div className="name-with-id">
+              <span className="user-fullname">{userName}</span>
+              <span className="user-emp-id">{empId}</span>
+            </div>
+            <div className="role-and-cluster">
+              <span className="user-role-label">{userRole}</span>
+              {clusterId && <span className="cluster-tag">{clusterId}</span>}
+            </div>
           </div>
           {showDropdown ? (
             <ChevronUp size={14} className="dropdown-caret" />
@@ -78,7 +87,10 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
               </div>
               <div className="user-text-meta">
                 <span className="user-fullname">{userName}</span>
-                <span className="user-role-label">{userRole}</span>
+                <span className="user-role-label">{userRole} • {empId}</span>
+                {user?.reportsTo && (
+                  <span className="reports-to-text">Reports to: {user.reportsTo}</span>
+                )}
               </div>
             </div>
 
@@ -90,7 +102,7 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
 
               <div className="dropdown-item">
                 <Building size={18} className="dropdown-item-icon" />
-                <span>Organization</span>
+                <span>Department: {user?.department || 'Executive'}</span>
               </div>
             </div>
           </div>

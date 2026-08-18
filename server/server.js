@@ -19,8 +19,13 @@ connectDB();
 // Routes
 app.use('/api', authRoutes);
 
+// Health check endpoint
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', app: 'Sruthi Technologies Manufacturing ERP API' });
+  res.json({ 
+    status: 'ok', 
+    app: 'Sruthi Technologies Manufacturing ERP API',
+    timestamp: new Date().toISOString()
+  });
 });
 
 app.listen(PORT, () => {

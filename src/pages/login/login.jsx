@@ -14,15 +14,46 @@ import {
   ShieldCheck,
   X,
   Sparkles,
+  Users,
+  UserCheck,
   Ticket,
   Target,
   CheckSquare,
-  UserCheck,
   CalendarOff,
   Receipt
 } from 'lucide-react';
 import logo from '../../assets/logo.png';
 import './login.css';
+
+const DEMO_ACCOUNTS = [
+  // CEO & HOB
+  { role: 'CEO', name: 'Rajesh Kumar', email: 'ceo@sruthitech-demo.com', empId: 'ST-CEO-001', dept: 'Executive', reportsTo: null },
+  { role: 'HEAD_OF_BUSINESS', name: 'Anil Reddy', email: 'hob@sruthitech-demo.com', empId: 'ST-HOB-001', dept: 'Executive', reportsTo: 'ST-CEO-001' },
+  // Sales Managers
+  { role: 'SALES_MANAGER', name: 'Suresh Babu (SM 1)', email: 'salesmanager1@sruthitech-demo.com', empId: 'ST-SM-001', dept: 'Sales', reportsTo: 'ST-HOB-001' },
+  { role: 'SALES_MANAGER', name: 'Priya Sharma (SM 2)', email: 'salesmanager2@sruthitech-demo.com', empId: 'ST-SM-002', dept: 'Sales', reportsTo: 'ST-HOB-001' },
+  // Sales Engineers
+  { role: 'SALES_ENGINEER', name: 'Arjun Rao (SE 1)', email: 'salesengineer1@sruthitech-demo.com', empId: 'ST-SE-001', dept: 'Sales', reportsTo: 'ST-SM-001' },
+  { role: 'SALES_ENGINEER', name: 'Naveen Kumar (SE 2)', email: 'salesengineer2@sruthitech-demo.com', empId: 'ST-SE-002', dept: 'Sales', reportsTo: 'ST-SM-001' },
+  { role: 'SALES_ENGINEER', name: 'Kiran Patel (SE 3)', email: 'salesengineer3@sruthitech-demo.com', empId: 'ST-SE-003', dept: 'Sales', reportsTo: 'ST-SM-002' },
+  { role: 'SALES_ENGINEER', name: 'Rahul Verma (SE 4)', email: 'salesengineer4@sruthitech-demo.com', empId: 'ST-SE-004', dept: 'Sales', reportsTo: 'ST-SM-002' },
+  // Service Managers
+  { role: 'SERVICE_MANAGER', name: 'Mahesh Reddy (SVM 1)', email: 'servicemanager1@sruthitech-demo.com', empId: 'ST-SVM-001', dept: 'Service', reportsTo: 'ST-HOB-001' },
+  { role: 'SERVICE_MANAGER', name: 'Lakshmi Devi (SVM 2)', email: 'servicemanager2@sruthitech-demo.com', empId: 'ST-SVM-002', dept: 'Service', reportsTo: 'ST-HOB-001' },
+  // Cluster Incharges
+  { role: 'CLUSTER_INCHARGE', name: 'Venkat Rao (Cluster 1)', email: 'cluster1@sruthitech-demo.com', empId: 'ST-CI-001', dept: 'Service', reportsTo: 'ST-SVM-001', clusterId: 'CLUSTER-001' },
+  { role: 'CLUSTER_INCHARGE', name: 'Sanjay Kumar (Cluster 2)', email: 'cluster2@sruthitech-demo.com', empId: 'ST-CI-002', dept: 'Service', reportsTo: 'ST-SVM-001', clusterId: 'CLUSTER-002' },
+  { role: 'CLUSTER_INCHARGE', name: 'Ramesh Naidu (Cluster 3)', email: 'cluster3@sruthitech-demo.com', empId: 'ST-CI-003', dept: 'Service', reportsTo: 'ST-SVM-002', clusterId: 'CLUSTER-003' },
+  // Service Engineers
+  { role: 'SERVICE_ENGINEER', name: 'Ajay Kumar (SVE 1)', email: 'serviceengineer1@sruthitech-demo.com', empId: 'ST-SVE-001', dept: 'Service', reportsTo: 'ST-CI-001', clusterId: 'CLUSTER-001' },
+  { role: 'SERVICE_ENGINEER', name: 'Vamsi Krishna (SVE 2)', email: 'serviceengineer2@sruthitech-demo.com', empId: 'ST-SVE-002', dept: 'Service', reportsTo: 'ST-CI-001', clusterId: 'CLUSTER-001' },
+  { role: 'SERVICE_ENGINEER', name: 'Rohit Singh (SVE 3)', email: 'serviceengineer3@sruthitech-demo.com', empId: 'ST-SVE-003', dept: 'Service', reportsTo: 'ST-CI-001', clusterId: 'CLUSTER-001' },
+  { role: 'SERVICE_ENGINEER', name: 'Karthik Reddy (SVE 4)', email: 'serviceengineer4@sruthitech-demo.com', empId: 'ST-SVE-004', dept: 'Service', reportsTo: 'ST-CI-002', clusterId: 'CLUSTER-002' },
+  { role: 'SERVICE_ENGINEER', name: 'Manish Kumar (SVE 5)', email: 'serviceengineer5@sruthitech-demo.com', empId: 'ST-SVE-005', dept: 'Service', reportsTo: 'ST-CI-002', clusterId: 'CLUSTER-002' },
+  { role: 'SERVICE_ENGINEER', name: 'Harish Rao (SVE 6)', email: 'serviceengineer6@sruthitech-demo.com', empId: 'ST-SVE-006', dept: 'Service', reportsTo: 'ST-CI-002', clusterId: 'CLUSTER-002' },
+  { role: 'SERVICE_ENGINEER', name: 'Praveen Kumar (SVE 7)', email: 'serviceengineer7@sruthitech-demo.com', empId: 'ST-SVE-007', dept: 'Service', reportsTo: 'ST-CI-003', clusterId: 'CLUSTER-003' },
+  { role: 'SERVICE_ENGINEER', name: 'Tarun Reddy (SVE 8)', email: 'serviceengineer8@sruthitech-demo.com', empId: 'ST-SVE-008', dept: 'Service', reportsTo: 'ST-CI-003', clusterId: 'CLUSTER-003' },
+];
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -31,19 +62,30 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [showForgotModal, setShowForgotModal] = useState(false);
+  const [showRoleSelectorModal, setShowRoleSelectorModal] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
   const [resetSuccess, setResetSuccess] = useState(false);
 
   const navigate = useNavigate();
   const { login } = useAuth();
 
-  const HARDCODED_EMAIL = 'ceo@erp.example';
-  const HARDCODED_PASSWORD = 'admin123@';
-
-  const handleAutoFill = () => {
-    setEmail(HARDCODED_EMAIL);
-    setPassword(HARDCODED_PASSWORD);
+  const handleSelectDemoUser = (userAcc) => {
+    setEmail(userAcc.email);
+    setPassword('Demo@123');
     setError('');
+    setShowRoleSelectorModal(false);
+
+    // Auto login
+    login({
+      employeeId: userAcc.empId,
+      email: userAcc.email,
+      name: userAcc.name,
+      role: userAcc.role,
+      department: userAcc.dept,
+      reportsTo: userAcc.reportsTo,
+      clusterId: userAcc.clusterId || null,
+    });
+    navigate('/dashboard');
   };
 
   const handleSubmit = async (e) => {
@@ -57,21 +99,40 @@ const Login = () => {
       return;
     }
 
+    // Find account in DEMO_ACCOUNTS
+    const foundAcc = DEMO_ACCOUNTS.find(
+      (a) => a.email.toLowerCase() === email.toLowerCase().trim()
+    );
+
     setTimeout(() => {
-      if (email.trim() === HARDCODED_EMAIL && password === HARDCODED_PASSWORD) {
+      if (foundAcc && (password === 'Demo@123' || password === 'admin123@')) {
         login({
-          email: HARDCODED_EMAIL,
+          employeeId: foundAcc.empId,
+          email: foundAcc.email,
+          name: foundAcc.name,
+          role: foundAcc.role,
+          department: foundAcc.dept,
+          reportsTo: foundAcc.reportsTo,
+          clusterId: foundAcc.clusterId || null,
+        });
+        setLoading(false);
+        navigate('/dashboard');
+      } else if (email === 'ceo@erp.example' && password === 'admin123@') {
+        login({
+          employeeId: 'ST-CEO-001',
+          email: 'ceo@erp.example',
+          name: 'Rajesh Kumar',
           role: 'CEO',
-          name: 'Executive Office',
-          department: 'Manufacturing HQ'
+          department: 'Executive',
+          reportsTo: null,
         });
         setLoading(false);
         navigate('/dashboard');
       } else {
-        setError(`Invalid credentials. Please use Email: "${HARDCODED_EMAIL}" and Password: "${HARDCODED_PASSWORD}"`);
+        setError('Invalid credentials. Password for demo accounts is "Demo@123".');
         setLoading(false);
       }
-    }, 500);
+    }, 400);
   };
 
   const handleForgotPassword = (e) => {
@@ -144,16 +205,16 @@ const Login = () => {
         <div className="login-form-panel">
           <div className="form-header">
             <h2>Sign In</h2>
-            <p>Welcome back! Enter your executive credentials to access the ERP dashboard.</p>
+            <p>Welcome back! Select a role or enter your credentials to test access.</p>
           </div>
 
-          {/* Quick Credential Helper Pill */}
-          <div className="quick-credential-pill" onClick={handleAutoFill} title="Click to auto-fill sample CEO credentials">
+          {/* 1-Click Role Selector Helper Pill */}
+          <div className="quick-credential-pill" onClick={() => setShowRoleSelectorModal(true)} title="Click to open 21 Demo Accounts selector">
             <div className="pill-left">
-              <Sparkles size={16} className="sparkle-icon" />
-              <span>Fill Default CEO Credentials</span>
+              <Users size={16} className="sparkle-icon" />
+              <span>Test Demo Accounts (21 Roles)</span>
             </div>
-            <span className="pill-badge">ceo@erp.example</span>
+            <span className="pill-badge">Click to Select</span>
           </div>
 
           {error && (
@@ -171,7 +232,7 @@ const Login = () => {
                 <input 
                   id="email"
                   type="email"
-                  placeholder="ceo@erp.example"
+                  placeholder="ceo@sruthitech-demo.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   autoComplete="email"
@@ -244,6 +305,54 @@ const Login = () => {
         </div>
       </div>
 
+      {/* 21 Role Accounts Modal */}
+      {showRoleSelectorModal && (
+        <div className="modal-overlay">
+          <div className="modal-content demo-roles-modal">
+            <div className="modal-header">
+              <div className="modal-title">
+                <Users size={22} className="modal-icon icon-navy" />
+                <h3>Select Role to Test (21 Demo Users)</h3>
+              </div>
+              <button 
+                className="close-modal-btn"
+                onClick={() => setShowRoleSelectorModal(false)}
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="role-selector-scroll-list">
+              <p className="modal-desc">
+                Click any employee below to instantly log in as that role and test permission hierarchy:
+              </p>
+
+              {['Executive', 'Sales', 'Service'].map((dept) => (
+                <div key={dept} className="dept-group">
+                  <h4 className="dept-title">{dept} Department</h4>
+                  <div className="role-grid">
+                    {DEMO_ACCOUNTS.filter((acc) => acc.dept === dept).map((acc) => (
+                      <div 
+                        key={acc.empId} 
+                        className="role-card" 
+                        onClick={() => handleSelectDemoUser(acc)}
+                      >
+                        <div className="role-card-left">
+                          <span className="role-emp-id">{acc.empId}</span>
+                          <span className="role-name">{acc.name}</span>
+                          <span className="role-badge">{acc.role}</span>
+                        </div>
+                        <span className="select-link">Login →</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Forgot Password Modal */}
       {showForgotModal && (
         <div className="modal-overlay">
@@ -282,7 +391,7 @@ const Login = () => {
                       <Mail className="input-icon" size={18} />
                       <input 
                         type="email" 
-                        placeholder="ceo@erp.example" 
+                        placeholder="ceo@sruthitech-demo.com" 
                         value={resetEmail}
                         onChange={(e) => setResetEmail(e.target.value)}
                         required

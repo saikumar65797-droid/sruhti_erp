@@ -39,12 +39,12 @@
   align-items: center;
 }
 
-/* User Profile Badge matching Screenshots 2 & 3 */
+/* User Profile Badge matching Screenshots */
 .user-profile-badge {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 4px 12px 4px 4px;
+  padding: 4px 14px 4px 4px;
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 9999px;
@@ -77,17 +77,53 @@
   flex-direction: column;
 }
 
+.name-with-id {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .user-fullname {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 800;
   color: #1A202C;
   line-height: 1.2;
 }
 
+.user-emp-id {
+  font-size: 0.7rem;
+  font-family: monospace;
+  color: #D32F2F;
+  background: rgba(211, 47, 47, 0.08);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.role-and-cluster {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 .user-role-label {
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   color: #718096;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.cluster-tag {
+  font-size: 0.68rem;
+  color: #00838F;
+  background: rgba(0, 188, 212, 0.1);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.reports-to-text {
+  font-size: 0.72rem;
+  color: #64748B;
 }
 
 .dropdown-caret {
@@ -95,12 +131,12 @@
   margin-left: 2px;
 }
 
-/* Profile Dropdown Menu matching Screenshot 3 */
+/* Profile Dropdown Menu */
 .profile-dropdown-card {
   position: absolute;
   top: 54px;
   right: 0;
-  width: 240px;
+  width: 250px;
   background: #FFFFFF;
   border: 1px solid #E2E8F0;
   border-radius: 16px;
@@ -151,7 +187,7 @@
   padding: 10px 12px;
   border-radius: 10px;
   color: #2D3748;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -164,24 +200,4 @@
 .dropdown-item:hover {
   background: #F7FAFC;
   color: #1A202C;
-}
-
-.dropdown-divider {
-  height: 1px;
-  background-color: #EDF2F7;
-  margin: 4px 0;
-}
-
-.signout-item {
-  color: #D32F2F;
-  font-weight: 700;
-}
-
-.signout-item:hover {
-  background: #FEF2F2;
-  color: #B71C1C;
-}
-
-.signout-icon {
-  color: #D32F2F;
 }
