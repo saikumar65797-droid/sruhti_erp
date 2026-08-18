@@ -38,18 +38,21 @@ const Sidebar = ({ isCollapsed, isMobileOpen, closeMobileSidebar }) => {
 
   return (
     <aside className={`screenshot-sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}`}>
-      {/* Mobile Close Button Header */}
-      <div className="mobile-sidebar-header">
-        <span className="mobile-header-title">SRUTHI ERP MENU</span>
-        <button className="mobile-close-btn" onClick={closeMobileSidebar}>
-          <X size={20} />
-        </button>
-      </div>
-
-      {/* Top Logo Area */}
+      {/* Top Logo Area (Mobile & Desktop) */}
       {(!isCollapsed || isMobileOpen) ? (
         <div className="sidebar-logo-container">
-          <img src={logo} alt="Sruthi Technologies" className="sidebar-brand-logo" />
+          <div className="logo-header-row">
+            <img src={logo} alt="Sruthi Technologies" className="sidebar-brand-logo" />
+            {isMobileOpen && (
+              <button 
+                className="mobile-close-btn" 
+                onClick={closeMobileSidebar}
+                title="Close Menu"
+              >
+                <X size={20} />
+              </button>
+            )}
+          </div>
           <div className="sidebar-divider">
             <span className="divider-line"></span>
             <span className="divider-text">MANUFACTURING ERP</span>
@@ -100,7 +103,7 @@ const Sidebar = ({ isCollapsed, isMobileOpen, closeMobileSidebar }) => {
           <div className="nav-item-icon-wrapper">
             <LogOut size={19} className="logout-icon" />
           </div>
-          {(!isCollapsed || isMobileOpen) && <span>Logout</span>}
+          {(!isCollapsed || isMobileOpen) && <span className="sidebar-logout-label">Logout</span>}
         </button>
       </div>
     </aside>

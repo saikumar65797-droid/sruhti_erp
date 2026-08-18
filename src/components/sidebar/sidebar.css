@@ -21,16 +21,21 @@
   align-items: center;
 }
 
-.mobile-sidebar-header {
-  display: none;
-}
-
 /* Top Logo Area */
 .sidebar-logo-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 16px;
+  width: 100%;
+}
+
+.logo-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
 }
 
 .sidebar-brand-logo {
@@ -189,6 +194,7 @@
   transition: all 0.2s ease;
 }
 
+/* Fix for Collapsed Logout Button (Screenshot 2) */
 .screenshot-sidebar.collapsed .sidebar-logout-btn {
   padding: 8px;
   justify-content: center;
@@ -196,6 +202,10 @@
   height: 44px;
   margin: 0 auto;
   border-radius: 12px;
+}
+
+.screenshot-sidebar.collapsed .sidebar-logout-label {
+  display: none;
 }
 
 .logout-icon {
@@ -212,7 +222,7 @@
   color: #FFFFFF;
 }
 
-/* Responsive Mobile Drawer Styles (< 768px) */
+/* Mobile Drawer Styles (< 768px) */
 .mobile-sidebar-backdrop {
   position: fixed;
   inset: 0;
@@ -245,24 +255,13 @@
     transform: translateX(0);
   }
 
-  .mobile-sidebar-header {
-    display: flex;
-    align-items: center;
+  .logo-header-row {
     justify-content: space-between;
-    padding-bottom: 12px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid #CBD5E1;
-  }
-
-  .mobile-header-title {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #0F2137;
-    letter-spacing: 0.5px;
+    margin-bottom: 8px;
   }
 
   .mobile-close-btn {
-    background: rgba(15, 23, 42, 0.06);
+    background: rgba(15, 23, 42, 0.08);
     border: none;
     padding: 6px;
     border-radius: 8px;
@@ -270,6 +269,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
   }
 
   .screenshot-sidebar.collapsed .screenshot-nav-item {
@@ -277,5 +277,16 @@
     width: 100%;
     height: auto;
     padding: 10px 14px;
+  }
+
+  .screenshot-sidebar.collapsed .sidebar-logout-btn {
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding: 10px 14px;
+  }
+
+  .screenshot-sidebar.collapsed .sidebar-logout-label {
+    display: inline;
   }
 }

@@ -41,18 +41,20 @@ const Navbar = ({ isCollapsed, isMobileOpen, toggleSidebar }) => {
 
   return (
     <header className="screenshot-navbar">
-      {/* Left side: Sidebar collapse / Mobile toggle button */}
+      {/* Left side: Sidebar collapse for Desktop OR Hamburger for Mobile */}
       <div className="navbar-left">
+        {/* Desktop Only Toggle « » */}
         <button 
-          className="collapse-toggle-btn desktop-toggle" 
+          className="collapse-toggle-btn desktop-toggle-btn" 
           onClick={toggleSidebar}
           title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
         >
           {isCollapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
         </button>
 
+        {/* Mobile Only Hamburger Toggle ≡ */}
         <button 
-          className="collapse-toggle-btn mobile-toggle" 
+          className="collapse-toggle-btn mobile-toggle-btn" 
           onClick={toggleSidebar}
           title="Open Navigation Menu"
         >

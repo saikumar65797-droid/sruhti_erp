@@ -16,12 +16,13 @@
   gap: 10px;
 }
 
-.mobile-toggle {
-  display: none;
+/* Desktop vs Mobile Toggle Buttons */
+.desktop-toggle-btn {
+  display: flex;
 }
 
-.desktop-toggle {
-  display: flex;
+.mobile-toggle-btn {
+  display: none;
 }
 
 .mobile-brand-title {
@@ -44,6 +45,7 @@
   padding: 8px;
   border-radius: 6px;
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .collapse-toggle-btn:hover {
@@ -222,16 +224,16 @@
   color: #1A202C;
 }
 
-/* Responsive Media Queries for Navbar */
+/* Media Queries for Responsive Top Navbar */
 @media (max-width: 767px) {
   .screenshot-navbar {
     padding: 0 14px;
   }
-  .desktop-toggle {
-    display: none;
+  .desktop-toggle-btn {
+    display: none !important;
   }
-  .mobile-toggle {
-    display: flex;
+  .mobile-toggle-btn {
+    display: flex !important;
   }
   .mobile-brand-title {
     display: inline-block;
