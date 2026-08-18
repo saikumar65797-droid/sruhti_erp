@@ -16,24 +16,6 @@
   gap: 10px;
 }
 
-/* Desktop vs Mobile Toggle Buttons */
-.desktop-toggle-btn {
-  display: flex;
-}
-
-.mobile-toggle-btn {
-  display: none;
-}
-
-.mobile-brand-title {
-  display: none;
-  font-family: var(--font-accent);
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: var(--logo-navy);
-  letter-spacing: 0.5px;
-}
-
 .collapse-toggle-btn {
   background: none;
   border: none;
@@ -51,6 +33,24 @@
 .collapse-toggle-btn:hover {
   background: #EDF2F7;
   color: #1A202C;
+}
+
+/* Strict Desktop vs Mobile Toggle Classes */
+.collapse-toggle-btn.desktop-toggle-btn {
+  display: flex !important;
+}
+
+.collapse-toggle-btn.mobile-toggle-btn {
+  display: none !important;
+}
+
+.mobile-brand-title {
+  display: none;
+  font-family: var(--font-accent);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--logo-navy);
+  letter-spacing: 0.5px;
 }
 
 .navbar-right {
@@ -224,15 +224,15 @@
   color: #1A202C;
 }
 
-/* Media Queries for Responsive Top Navbar */
+/* Media Queries for Responsive Top Navbar (< 768px) */
 @media (max-width: 767px) {
   .screenshot-navbar {
     padding: 0 14px;
   }
-  .desktop-toggle-btn {
+  .collapse-toggle-btn.desktop-toggle-btn {
     display: none !important;
   }
-  .mobile-toggle-btn {
+  .collapse-toggle-btn.mobile-toggle-btn {
     display: flex !important;
   }
   .mobile-brand-title {

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Navbar from '../navbar/navbar';
 import Sidebar from '../sidebar/sidebar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const ERPLayout = () => {
+  const { pathname } = useLocation();
+  const mainScrollRef = useRef(null);
+
   const [isCollapsed, setIsCollapsed] = useState(() => {
-    // If screen width is mobile/tablet, default to collapsed
     if (typeof window !== 'undefined' && window.innerWidth < 992) {
       return true;
     }
@@ -14,6 +16,14 @@ const ERPLayout = () => {
   });
 
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  // Scroll to top of page on every route navigation
+  useEffect(() => {
+    if (mainScrollRef.current) {
+      mainScrollRef.current.scrollTop = 0;
+    }
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   // Handle window resize auto-adjustment
   useEffect(() => {
@@ -64,7 +74,7 @@ const ERPLayout = () => {
           isMobileOpen={isMobileOpen}
           toggleSidebar={toggleSidebar} 
         />
-        <div className="erp-main-scroll-view">
+        <div className="erp-main-scroll-view" ref={mainScrollRef}>
           <Outlet />
         </div>
       </div>
