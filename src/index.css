@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
+
+:root {
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-accent: 'Space Grotesk', sans-serif;
+
+  /* Clean White Theme Base */
+  --bg-main: #FFFFFF;
+  --bg-surface: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F1F5F9;
+  
+  /* Brand Logo Combination Colors */
+  --logo-navy: #0F2137;         /* Primary Dark Navy Blue from Sruthi logo text */
+  --logo-navy-hover: #162E4D;
+  --logo-red: #D32F2F;          /* Crimson Red from Sruthi logo top swirl */
+  --logo-red-hover: #B71C1C;
+  --logo-cyan: #00BCD4;         /* Electric Cyan from Sruthi logo bottom swirl */
+  --logo-cyan-hover: #00ACC1;
+
+  --primary: var(--logo-navy);
+  --primary-glow: rgba(15, 33, 55, 0.15);
+
+  --text-main: #0F172A;
+  --text-muted: #475569;
+  --text-dim: #94A3B8;
+
+  --border-color: #E2E8F0;
+  --border-light: #CBD5E1;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 15px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 10px 30px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 20px rgba(0, 188, 212, 0.2);
+
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+input, select, textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Glassmorphism / Clean Card helpers */
+.clean-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Logo Color Highlight Utilities */
+.text-logo-navy {
+  color: var(--logo-navy);
+}
+
+.text-logo-red {
+  color: var(--logo-red);
+}
+
+.text-logo-cyan {
+  color: var(--logo-cyan);
+}
+
+.bg-logo-gradient {
+  background: linear-gradient(135deg, var(--logo-navy), #1A365D);
+  color: #FFFFFF;
+}
+
+.gradient-text-logo {
+  background: linear-gradient(135deg, var(--logo-navy) 30%, var(--logo-red) 70%, var(--logo-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Badge styles */
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-active {
+  background: rgba(0, 188, 212, 0.1);
+  color: var(--logo-navy);
+  border: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.badge-red {
+  background: rgba(211, 47, 47, 0.1);
+  color: var(--logo-red);
+  border: 1px solid rgba(211, 47, 47, 0.3);
+}
