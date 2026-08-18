@@ -6,13 +6,12 @@ import {
   ChevronDown, 
   ChevronUp, 
   Bell, 
-  Building, 
-  Ban 
+  Building 
 } from 'lucide-react';
 import './navbar.css';
 
 const Navbar = ({ isCollapsed, toggleSidebar }) => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -50,7 +49,7 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
         </button>
       </div>
 
-      {/* Right side: User Profile Badge & Dropdown with Outside Click Ref */}
+      {/* Right side: User Profile Badge & Dropdown */}
       <div className="navbar-right" ref={dropdownRef}>
         <div 
           className="user-profile-badge" 
@@ -92,19 +91,6 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
               <div className="dropdown-item">
                 <Building size={18} className="dropdown-item-icon" />
                 <span>Organization</span>
-              </div>
-
-              <div className="dropdown-divider"></div>
-
-              <div 
-                className="dropdown-item signout-item" 
-                onClick={() => {
-                  setShowDropdown(false);
-                  logout();
-                }}
-              >
-                <Ban size={18} className="signout-icon" />
-                <span>Sign out</span>
               </div>
             </div>
           </div>

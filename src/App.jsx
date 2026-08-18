@@ -10,6 +10,7 @@ import Leads from './pages/leads/leads';
 import Tasks from './pages/tasks/tasks';
 import Leave from './pages/leave/leave';
 import Expense from './pages/expense/expense';
+import Calendar from './pages/calendar/calendar';
 
 // Protected Route Guard
 const ProtectedRoute = ({ children }) => {
@@ -43,6 +44,7 @@ function AppRoutes() {
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/leave" element={<Leave />} />
         <Route path="/expense" element={<Expense />} />
+        <Route path="/calendar" element={<Calendar />} />
       </Route>
 
       {/* Fallback to home */}

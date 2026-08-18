@@ -1,26 +1,34 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { 
+  LayoutDashboard,
   Clock, 
-  Palmtree, 
-  CheckSquare, 
   Ticket, 
   Target, 
+  CheckSquare, 
+  Palmtree, 
   Receipt,
-  LayoutDashboard
+  CalendarDays,
+  LogOut
 } from 'lucide-react';
 import logo from '../../assets/logo.png';
 import './sidebar.css';
 
 const Sidebar = ({ isCollapsed }) => {
+  const { logout } = useAuth();
+
+  // Menu items in exact requested order:
+  // dashboard, attendance, tickets, leads, tasks, leave, expense, calendar
   const navItems = [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Attendance', path: '/attendance', icon: Clock },
-    { name: 'Leave', path: '/leave', icon: Palmtree },
-    { name: 'Tasks', path: '/tasks', icon: CheckSquare },
     { name: 'Tickets', path: '/tickets', icon: Ticket },
     { name: 'Leads', path: '/leads', icon: Target },
+    { name: 'Tasks', path: '/tasks', icon: CheckSquare },
+    { name: 'Leave', path: '/leave', icon: Palmtree },
     { name: 'Expense', path: '/expense', icon: Receipt },
+    { name: 'Calendar', path: '/calendar', icon: CalendarDays },
   ];
 
   return (
@@ -64,6 +72,20 @@ const Sidebar = ({ isCollapsed }) => {
           );
         })}
       </nav>
+
+      {/* Bottom Logout Button */}
+      <div className="sidebar-bottom-action">
+        <button 
+          className="sidebar-logout-btn" 
+          onClick={logout}
+          title="Logout"
+        >
+          <div className="nav-item-icon-wrapper">
+            <LogOut size={19} className="logout-icon" />
+          </div>
+          {!isCollapsed && <span>Logout</span>}
+        </button>
+      </div>
     </aside>
   );
 };
