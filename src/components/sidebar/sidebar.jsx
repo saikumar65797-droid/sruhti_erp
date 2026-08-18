@@ -57,7 +57,7 @@ const Sidebar = ({ isCollapsed }) => {
               }
             >
               <div className="nav-item-icon-wrapper">
-                <Icon size={22} className="screenshot-nav-icon" />
+                <Icon size={19} className="screenshot-nav-icon" />
               </div>
               {!isCollapsed && <span className="screenshot-nav-label">{item.name}</span>}
             </NavLink>
