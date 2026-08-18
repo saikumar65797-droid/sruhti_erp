@@ -7,11 +7,11 @@ import {
   ChevronUp, 
   Bell, 
   Building,
-  ShieldCheck
+  Menu
 } from 'lucide-react';
 import './navbar.css';
 
-const Navbar = ({ isCollapsed, toggleSidebar }) => {
+const Navbar = ({ isCollapsed, isMobileOpen, toggleSidebar }) => {
   const { user } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef(null);
@@ -41,15 +41,25 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
 
   return (
     <header className="screenshot-navbar">
-      {/* Left side: Sidebar collapse toggle icon « */}
+      {/* Left side: Sidebar collapse / Mobile toggle button */}
       <div className="navbar-left">
         <button 
-          className="collapse-toggle-btn" 
+          className="collapse-toggle-btn desktop-toggle" 
           onClick={toggleSidebar}
           title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
         >
           {isCollapsed ? <ChevronsRight size={18} /> : <ChevronsLeft size={18} />}
         </button>
+
+        <button 
+          className="collapse-toggle-btn mobile-toggle" 
+          onClick={toggleSidebar}
+          title="Open Navigation Menu"
+        >
+          <Menu size={20} />
+        </button>
+        
+        <span className="mobile-brand-title">SRUTHI ERP</span>
       </div>
 
       {/* Right side: User Profile Badge & Dropdown */}
@@ -61,7 +71,7 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
           <div className="avatar-circle">
             <span>{initial}</span>
           </div>
-          <div className="user-text-meta">
+          <div className="user-text-meta desktop-user-meta">
             <div className="name-with-id">
               <span className="user-fullname">{userName}</span>
               <span className="user-emp-id">{empId}</span>

@@ -13,6 +13,24 @@
 .navbar-left {
   display: flex;
   align-items: center;
+  gap: 10px;
+}
+
+.mobile-toggle {
+  display: none;
+}
+
+.desktop-toggle {
+  display: flex;
+}
+
+.mobile-brand-title {
+  display: none;
+  font-family: var(--font-accent);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--logo-navy);
+  letter-spacing: 0.5px;
 }
 
 .collapse-toggle-btn {
@@ -39,7 +57,7 @@
   align-items: center;
 }
 
-/* User Profile Badge matching Screenshots */
+/* User Profile Badge */
 .user-profile-badge {
   display: flex;
   align-items: center;
@@ -70,6 +88,7 @@
   font-weight: 800;
   font-size: 1rem;
   box-shadow: 0 2px 8px rgba(211, 47, 47, 0.3);
+  flex-shrink: 0;
 }
 
 .user-text-meta {
@@ -88,6 +107,7 @@
   font-weight: 800;
   color: #1A202C;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .user-emp-id {
@@ -200,4 +220,26 @@
 .dropdown-item:hover {
   background: #F7FAFC;
   color: #1A202C;
+}
+
+/* Responsive Media Queries for Navbar */
+@media (max-width: 767px) {
+  .screenshot-navbar {
+    padding: 0 14px;
+  }
+  .desktop-toggle {
+    display: none;
+  }
+  .mobile-toggle {
+    display: flex;
+  }
+  .mobile-brand-title {
+    display: inline-block;
+  }
+  .desktop-user-meta {
+    display: none;
+  }
+  .user-profile-badge {
+    padding: 3px;
+  }
 }

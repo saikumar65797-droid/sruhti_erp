@@ -9,7 +9,7 @@
   top: 0;
   padding: 20px 14px;
   z-index: 90;
-  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), padding 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), padding 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s ease;
   overflow-y: auto;
   flex-shrink: 0;
 }
@@ -19,6 +19,10 @@
   width: 70px;
   padding: 16px 8px;
   align-items: center;
+}
+
+.mobile-sidebar-header {
+  display: none;
 }
 
 /* Top Logo Area */
@@ -206,4 +210,72 @@
 
 .sidebar-logout-btn:hover .logout-icon {
   color: #FFFFFF;
+}
+
+/* Responsive Mobile Drawer Styles (< 768px) */
+.mobile-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 990;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 767px) {
+  .screenshot-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 260px !important;
+    z-index: 1000;
+    transform: translateX(-100%);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.15);
+    padding: 16px 14px;
+    align-items: stretch !important;
+  }
+
+  .screenshot-sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .mobile-sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #CBD5E1;
+  }
+
+  .mobile-header-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #0F2137;
+    letter-spacing: 0.5px;
+  }
+
+  .mobile-close-btn {
+    background: rgba(15, 23, 42, 0.06);
+    border: none;
+    padding: 6px;
+    border-radius: 8px;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .screenshot-sidebar.collapsed .screenshot-nav-item {
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding: 10px 14px;
+  }
 }

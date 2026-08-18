@@ -10,36 +10,44 @@ import {
   Palmtree, 
   Receipt,
   CalendarDays,
-  LogOut
+  LogOut,
+  X
 } from 'lucide-react';
 import logo from '../../assets/logo.png';
 import './sidebar.css';
 
-const Sidebar = ({ isCollapsed }) => {
-  const { user, logout } = useAuth();
-  const role = user?.role || 'CEO';
+const Sidebar = ({ isCollapsed, isMobileOpen, closeMobileSidebar }) => {
+  const { logout } = useAuth();
 
-  // Base list of all items in requested order:
-  // dashboard, attendance, tickets, leads, tasks, leave, expense, calendar
-  const allNavItems = [
-    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard, roles: ['ALL'] },
-    { name: 'Attendance', path: '/attendance', icon: Clock, roles: ['ALL'] },
-    { name: 'Tickets', path: '/tickets', icon: Ticket, roles: ['ALL'] },
-    { name: 'Leads', path: '/leads', icon: Target, roles: ['ALL'] },
-    { name: 'Tasks', path: '/tasks', icon: CheckSquare, roles: ['ALL'] },
-    { name: 'Leave', path: '/leave', icon: Palmtree, roles: ['ALL'] },
-    { name: 'Expense', path: '/expense', icon: Receipt, roles: ['ALL'] },
-    { name: 'Calendar', path: '/calendar', icon: CalendarDays, roles: ['ALL'] },
+  const navItems = [
+    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+    { name: 'Attendance', path: '/attendance', icon: Clock },
+    { name: 'Tickets', path: '/tickets', icon: Ticket },
+    { name: 'Leads', path: '/leads', icon: Target },
+    { name: 'Tasks', path: '/tasks', icon: CheckSquare },
+    { name: 'Leave', path: '/leave', icon: Palmtree },
+    { name: 'Expense', path: '/expense', icon: Receipt },
+    { name: 'Calendar', path: '/calendar', icon: CalendarDays },
   ];
 
-  const navItems = allNavItems.filter(
-    (item) => item.roles.includes('ALL') || item.roles.includes(role)
-  );
+  const handleNavClick = () => {
+    if (closeMobileSidebar) {
+      closeMobileSidebar();
+    }
+  };
 
   return (
-    <aside className={`screenshot-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+    <aside className={`screenshot-sidebar ${isCollapsed ? 'collapsed' : ''} ${isMobileOpen ? 'mobile-open' : ''}`}>
+      {/* Mobile Close Button Header */}
+      <div className="mobile-sidebar-header">
+        <span className="mobile-header-title">SRUTHI ERP MENU</span>
+        <button className="mobile-close-btn" onClick={closeMobileSidebar}>
+          <X size={20} />
+        </button>
+      </div>
+
       {/* Top Logo Area */}
-      {!isCollapsed ? (
+      {(!isCollapsed || isMobileOpen) ? (
         <div className="sidebar-logo-container">
           <img src={logo} alt="Sruthi Technologies" className="sidebar-brand-logo" />
           <div className="sidebar-divider">
@@ -65,6 +73,7 @@ const Sidebar = ({ isCollapsed }) => {
               key={item.path}
               to={item.path}
               title={item.name}
+              onClick={handleNavClick}
               className={({ isActive }) => 
                 `screenshot-nav-item ${isActive ? 'active' : ''}`
               }
@@ -72,7 +81,7 @@ const Sidebar = ({ isCollapsed }) => {
               <div className="nav-item-icon-wrapper">
                 <Icon size={19} className="screenshot-nav-icon" />
               </div>
-              {!isCollapsed && <span className="screenshot-nav-label">{item.name}</span>}
+              {(!isCollapsed || isMobileOpen) && <span className="screenshot-nav-label">{item.name}</span>}
             </NavLink>
           );
         })}
@@ -82,13 +91,16 @@ const Sidebar = ({ isCollapsed }) => {
       <div className="sidebar-bottom-action">
         <button 
           className="sidebar-logout-btn" 
-          onClick={logout}
+          onClick={() => {
+            handleNavClick();
+            logout();
+          }}
           title="Logout"
         >
           <div className="nav-item-icon-wrapper">
             <LogOut size={19} className="logout-icon" />
           </div>
-          {!isCollapsed && <span>Logout</span>}
+          {(!isCollapsed || isMobileOpen) && <span>Logout</span>}
         </button>
       </div>
     </aside>
