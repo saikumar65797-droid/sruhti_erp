@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import ERPLayout from './components/layout/ERPLayout';
 import Login from './pages/login/login';
 import Dashboard from './pages/dashboard/dashboard';
 import Attendance from './pages/attendance/attendance';
@@ -32,13 +33,18 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
-      <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-      <Route path="/attendance" element={<ProtectedRoute><Attendance /></ProtectedRoute>} />
-      <Route path="/tickets" element={<ProtectedRoute><Tickets /></ProtectedRoute>} />
-      <Route path="/leads" element={<ProtectedRoute><Leads /></ProtectedRoute>} />
-      <Route path="/tasks" element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
-      <Route path="/leave" element={<ProtectedRoute><Leave /></ProtectedRoute>} />
-      <Route path="/expense" element={<ProtectedRoute><Expense /></ProtectedRoute>} />
+      
+      {/* Protected ERP Shell Layout */}
+      <Route element={<ProtectedRoute><ERPLayout /></ProtectedRoute>}>
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/attendance" element={<Attendance />} />
+        <Route path="/tickets" element={<Tickets />} />
+        <Route path="/leads" element={<Leads />} />
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/leave" element={<Leave />} />
+        <Route path="/expense" element={<Expense />} />
+      </Route>
+
       {/* Fallback to home */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
