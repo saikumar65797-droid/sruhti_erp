@@ -4,7 +4,6 @@ import {
   Clock, 
   Palmtree, 
   CheckSquare, 
-  CalendarDays, 
   Ticket, 
   Target, 
   Receipt,
@@ -26,7 +25,7 @@ const Sidebar = ({ isCollapsed }) => {
 
   return (
     <aside className={`screenshot-sidebar ${isCollapsed ? 'collapsed' : ''}`}>
-      {/* Top Logo Area (Full mode vs Collapsed mode) */}
+      {/* Top Logo Area */}
       {!isCollapsed ? (
         <div className="sidebar-logo-container">
           <img src={logo} alt="Sruthi Technologies" className="sidebar-brand-logo" />
@@ -38,11 +37,13 @@ const Sidebar = ({ isCollapsed }) => {
         </div>
       ) : (
         <div className="sidebar-logo-collapsed">
-          <img src={logo} alt="Sruthi Logo" className="collapsed-mini-logo" />
+          <div className="collapsed-logo-badge" title="Sruthi Technologies">
+            <img src={logo} alt="Sruthi Logo" className="collapsed-brand-img" />
+          </div>
         </div>
       )}
 
-      {/* Navigation Links */}
+      {/* Navigation Menu */}
       <nav className="sidebar-nav-menu">
         {navItems.map((item) => {
           const Icon = item.icon;

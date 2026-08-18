@@ -7,16 +7,17 @@
   height: 100vh;
   position: sticky;
   top: 0;
-  padding: 32px 20px;
+  padding: 28px 18px;
   z-index: 90;
   transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), padding 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
+  flex-shrink: 0;
 }
 
-/* Collapsed Mini Sidebar matching Screenshot 1 */
+/* Collapsed Mini Sidebar matching Screenshot */
 .screenshot-sidebar.collapsed {
   width: 78px;
-  padding: 24px 10px;
+  padding: 20px 10px;
   align-items: center;
 }
 
@@ -25,25 +26,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .sidebar-brand-logo {
-  height: 65px;
+  height: 62px;
   object-fit: contain;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .sidebar-logo-collapsed {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   width: 100%;
 }
 
-.collapsed-mini-logo {
-  height: 38px;
+.collapsed-logo-badge {
+  width: 48px;
+  height: 48px;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(15, 33, 55, 0.08);
+  padding: 4px;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.collapsed-logo-badge:hover {
+  transform: scale(1.05);
+  border-color: #D32F2F;
+}
+
+.collapsed-brand-img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -74,7 +96,7 @@
 .sidebar-nav-menu {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
 }
 
@@ -95,8 +117,8 @@
 .screenshot-sidebar.collapsed .screenshot-nav-item {
   padding: 12px;
   justify-content: center;
-  width: 56px;
-  height: 56px;
+  width: 54px;
+  height: 54px;
   margin: 0 auto;
   border-radius: 16px;
 }
@@ -119,7 +141,7 @@
   color: #000000;
 }
 
-/* Active Item matching Screenshot 1 & Collapsed Screenshot 1 */
+/* Active Item matching Screenshot */
 .screenshot-nav-item.active {
   background: #FEE2E2;
   border-left: 5px solid #D32F2F;

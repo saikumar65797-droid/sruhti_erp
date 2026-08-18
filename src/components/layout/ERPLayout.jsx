@@ -4,7 +4,6 @@ import Sidebar from '../sidebar/sidebar';
 import { Outlet } from 'react-router-dom';
 
 const ERPLayout = () => {
-  // Save collapsed state in localStorage so it persists across refreshes & navigation
   const [isCollapsed, setIsCollapsed] = useState(() => {
     const saved = localStorage.getItem('sruthi_erp_sidebar_collapsed');
     return saved ? JSON.parse(saved) : false;
@@ -23,7 +22,9 @@ const ERPLayout = () => {
       <Sidebar isCollapsed={isCollapsed} />
       <div className="erp-body-layout">
         <Navbar isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
-        <Outlet />
+        <div className="erp-main-scroll-view">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

@@ -1,21 +1,30 @@
 .erp-app-shell {
   min-height: 100vh;
+  height: 100vh;
+  width: 100vw;
   background-color: #F8FAFC;
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  overflow: hidden;
 }
 
 .erp-body-layout {
   display: flex;
   flex-direction: column;
   flex: 1;
+  height: 100vh;
   min-width: 0;
+  background-color: #F8FAFC;
+  overflow: hidden;
+}
+
+.erp-main-scroll-view {
+  flex: 1;
+  overflow-y: auto;
   background-color: #F8FAFC;
 }
 
 .dashboard-main-content {
-  flex: 1;
   padding: 28px;
   display: flex;
   flex-direction: column;
