@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { 
   ChevronsLeft, 
@@ -7,18 +7,35 @@ import {
   ChevronUp, 
   Bell, 
   Building, 
-  Ban, 
-  User 
+  Ban 
 } from 'lucide-react';
 import './navbar.css';
 
 const Navbar = ({ isCollapsed, toggleSidebar }) => {
   const { user, logout } = useAuth();
   const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
-  const userName = user?.name || 'Executive CEO';
+  const userName = user?.name || 'Executive Office';
   const userRole = user?.role || 'CEO';
-  const initial = userName.charAt(0).toUpperCase() || 'D';
+  const initial = userName.charAt(0).toUpperCase() || 'E';
+
+  // Handle click outside to close the profile dropdown
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDropdown]);
 
   return (
     <header className="screenshot-navbar">
@@ -33,8 +50,8 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
         </button>
       </div>
 
-      {/* Right side: User Profile Badge & Dropdown */}
-      <div className="navbar-right">
+      {/* Right side: User Profile Badge & Dropdown with Outside Click Ref */}
+      <div className="navbar-right" ref={dropdownRef}>
         <div 
           className="user-profile-badge" 
           onClick={() => setShowDropdown(!showDropdown)}
@@ -53,7 +70,7 @@ const Navbar = ({ isCollapsed, toggleSidebar }) => {
           )}
         </div>
 
-        {/* Dropdown Card matching Screenshot 3 */}
+        {/* Dropdown Card */}
         {showDropdown && (
           <div className="profile-dropdown-card">
             <div className="dropdown-profile-header">
